@@ -28,5 +28,27 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         })
-    ]
+    ],
+    devServer: {
+        proxy: {
+            "/geo-review/list": {
+                "target": "http://localhost:8181",
+                "pathRewrite": {
+                    "^/geo-review": ""
+                }
+            },
+            "/geo-review/add": {
+                "target": "http://localhost:8181",
+                "pathRewrite": {
+                    "^/geo-review": ""
+                }
+            },
+            "/geo-review/coords": {
+                "target": "http://localhost:8181",
+                "pathRewrite": {
+                    "^/geo-review": ""
+                }
+            },
+        }
+    }
 }

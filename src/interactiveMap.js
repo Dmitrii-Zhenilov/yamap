@@ -21,9 +21,9 @@ export default class InteractiveMap {
 
     loadYMaps() {
         return new Promise((resolve) => ymaps.ready(resolve));
-    }
-
-    initMap() {
+        }
+    
+        initMap() {
         this.clusterer = new ymaps.Clusterer({
             groupByCoordinates: true,
             clusterDisableClickZoom: true,
@@ -35,30 +35,30 @@ export default class InteractiveMap {
         });
         this.map = new ymaps.Map(this.mapId, {
             center: [55.76, 37.64],
-            zoom: 12,
+            zoom: 10,
         });
         this.map.events.add('click', (e) => this.onClick(e.get('coords')));
         this.map.geoObjects.add(this.clusterer);
-    }
-
-    openBalloonContent(coords, content) {
+        }
+    
+        openBalloon(coords, content) {
         this.map.balloon.open(coords, content);
-    }
-
-    setBalloonContent(content) {
+        }
+    
+        setBalloonContent(content) {
         this.map.balloon.setData(content);
-    }
-
-    closeBalloon() {
+        }
+    
+        closeBalloon() {
         this.map.balloon.close();
-    }
-
-    createPlacemark(coords) {
+        }
+    
+        createPlacemark(coords) {
         const placemark = new ymaps.Placemark(coords);
         placemark.events.add('click', (e) => {
             const coords = e.get('target').geometry.getCoordinates();
             this.onClick(coords);
         });
         this.clusterer.add(placemark);
+        }
     }
-}
